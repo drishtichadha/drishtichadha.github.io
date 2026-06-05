@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>My New Hugo Project</title>
+		<link>http://localhost:1314/</link>
+		<description>Recent content on My New Hugo Project</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 05 Jun 2026 13:43:58 +0530</lastBuildDate>
+		
+			<atom:link href="http://localhost:1314/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Hotstar Streaming</title>
+				<link>http://localhost:1314/posts/hotstar-streaming/</link>
+				<pubDate>Fri, 05 Jun 2026 13:43:58 +0530</pubDate>
+				<guid>http://localhost:1314/posts/hotstar-streaming/</guid>
+				<description>&lt;h1 id=&#34;i-thought-hotstar-was-just-playing-a-video-then-i-started-thinking-about-the-rcb-vs-gt-ipl-final&#34;&gt;I Thought Hotstar Was Just “Playing a Video.” Then I Started Thinking About the RCB vs GT IPL Final.&lt;/h1&gt;&#xA;&lt;p&gt;When I was watching the IPL final between RCB and GT, I had a random thought:&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;How is Hotstar not crashing right now?&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Millions of people are watching the exact same match at the exact same moment. Every six, every wicket, every review has millions of fans glued to their screens.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title></title>
+				<link>http://localhost:1314/posts/hotstar_ipl_final_newbie_blog-1/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1314/posts/hotstar_ipl_final_newbie_blog-1/</guid>
+				<description>&lt;h1 id=&#34;i-thought-hotstar-was-just-playing-a-video-then-i-started-thinking-about-the-rcb-vs-gt-ipl-final&#34;&gt;I Thought Hotstar Was Just “Playing a Video.” Then I Started Thinking About the RCB vs GT IPL Final.&lt;/h1&gt;&#xA;&lt;p&gt;When I was watching the IPL final between RCB and GT, I had a random thought:&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;How is Hotstar not crashing right now?&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Millions of people are watching the exact same match at the exact same moment. Every six, every wicket, every review has millions of fans glued to their screens.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>
