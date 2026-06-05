@@ -231,10 +231,3 @@ But a small part of me will also be wondering about the engineers staring at das
 
 Hotstar provides a compelling mix of live sports and on‑demand Indian content, and it continues to expand internationally through Disney+ partnerships. Choose a plan that matches your viewing habits (sports fans usually need premium access), keep your apps updated, and use the tips above to get a smooth streaming experience.
 
-If you'd like, I can:
-
-- Turn this into a shorter summary or a long-form review
-- Add screenshots, device-specific instructions, or subscription links
-- Mark the post as published by setting `draft = false`
-
-Tell me which of these you'd like next.
