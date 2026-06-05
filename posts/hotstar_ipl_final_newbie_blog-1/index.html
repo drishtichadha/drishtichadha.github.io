@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1314&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title> - My New Hugo Project</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="site-header">
+        <div class="logo">HS</div>
+        <div>
+          <h1 class="title">My New Hugo Project</h1>
+          <p class="subtitle">A simple Hugo site</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="post-title"></h2>
+        <div class="meta">Jan 1, 0001</div>
+        <article>
+          <h1 id="i-thought-hotstar-was-just-playing-a-video-then-i-started-thinking-about-the-rcb-vs-gt-ipl-final">I Thought Hotstar Was Just “Playing a Video.” Then I Started Thinking About the RCB vs GT IPL Final.</h1>
+<p>When I was watching the IPL final between RCB and GT, I had a random thought:</p>
+<p><strong>How is Hotstar not crashing right now?</strong></p>
+<p>Millions of people are watching the exact same match at the exact same moment. Every six, every wicket, every review has millions of fans glued to their screens.</p>
+<p>Yet somehow, I click <em>Play</em> and the stream just works.</p>
+<p>As someone who spends a lot of time around data and technology, I realized I actually had no idea how difficult this problem is.</p>
+<p>So I went down a rabbit hole.</p>
+<p>And what I found was that streaming an IPL final is less like running an app and more like operating a global-scale distributed system.</p>
+<hr>
+<h1 id="the-question-that-started-it-all">The Question That Started It All</h1>
+<p>Imagine this:</p>
+<p>RCB is batting.</p>
+<p>It&rsquo;s the final over.</p>
+<p>Virat Kohli is at the crease.</p>
+<p>Suddenly 50 million people are watching simultaneously.</p>
+<p>My first assumption was:</p>
+<blockquote>
+<p>&ldquo;Hotstar probably has a really big server.&rdquo;</p>
+</blockquote>
+<p>Turns out that idea falls apart almost immediately.</p>
+<p>If every viewer connected to a single server, it would probably collapse before the first ball was bowled.</p>
+<hr>
+<h2 id="what-actually-happens-when-you-press-play">What Actually Happens When You Press Play?</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Me
+</span></span><span style="display:flex;"><span> │
+</span></span><span style="display:flex;"><span> ▼
+</span></span><span style="display:flex;"><span>Hotstar Server
+</span></span><span style="display:flex;"><span> │
+</span></span><span style="display:flex;"><span> ▼
+</span></span><span style="display:flex;"><span>Video
+</span></span></code></pre></div><p>Reality is much more complicated.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>                     ┌─────────────┐
+</span></span><span style="display:flex;"><span>                     │ Hotstar App │
+</span></span><span style="display:flex;"><span>                     └──────┬──────┘
+</span></span><span style="display:flex;"><span>                            │
+</span></span><span style="display:flex;"><span>                            ▼
+</span></span><span style="display:flex;"><span>                     ┌─────────────┐
+</span></span><span style="display:flex;"><span>                     │ DNS Routing │
+</span></span><span style="display:flex;"><span>                     └──────┬──────┘
+</span></span><span style="display:flex;"><span>                            │
+</span></span><span style="display:flex;"><span>                            ▼
+</span></span><span style="display:flex;"><span>                     ┌─────────────┐
+</span></span><span style="display:flex;"><span>                     │ CDN Edge    │
+</span></span><span style="display:flex;"><span>                     │ Near Me     │
+</span></span><span style="display:flex;"><span>                     └──────┬──────┘
+</span></span><span style="display:flex;"><span>                            │
+</span></span><span style="display:flex;"><span>                            ▼
+</span></span><span style="display:flex;"><span>                     ┌─────────────┐
+</span></span><span style="display:flex;"><span>                     │ Video Chunks│
+</span></span><span style="display:flex;"><span>                     └─────────────┘
+</span></span></code></pre></div><p>The biggest surprise? Most viewers are not getting video directly from Hotstar. They&rsquo;re getting it from CDN servers distributed across the country.</p>
+<hr>
+<h2 id="the-cdn-concept-finally-clicked-for-me">The CDN Concept Finally Clicked For Me</h2>
+<p>Think about ordering food.</p>
+<p>Instead of one giant restaurant serving the whole country, imagine thousands of local outlets preparing the same meal.</p>
+<p>That&rsquo;s essentially what a CDN does.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>                 Origin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    │
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      ┌─────────────┼─────────────┐
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      ▼             ▼             ▼
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Delhi CDN     Mumbai CDN    Bangalore CDN
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      │             │             │
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Millions      Millions      Millions
+</span></span><span style="display:flex;"><span> of Users      of Users      of Users
+</span></span></code></pre></div><p>Now the load is spread out.</p>
+<hr>
+<h2 id="then-i-learned-its-not-even-one-video">Then I Learned It&rsquo;s Not Even One Video</h2>
+<p>A single live feed gets converted into multiple versions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>4K       → 15 Mbps
+</span></span><span style="display:flex;"><span>1080p    → 6 Mbps
+</span></span><span style="display:flex;"><span>720p     → 3 Mbps
+</span></span><span style="display:flex;"><span>480p     → 1 Mbps
+</span></span><span style="display:flex;"><span>360p     → 800 Kbps
+</span></span></code></pre></div><p>Your phone constantly switches quality levels depending on network conditions.</p>
+<hr>
+<h2 id="the-part-that-sounds-like-a-nightmare">The Part That Sounds Like a Nightmare</h2>
+<p>Traffic during an IPL final doesn&rsquo;t grow gradually. It explodes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Users
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>60M |                     /\
+</span></span><span style="display:flex;"><span>50M |                   /    \
+</span></span><span style="display:flex;"><span>40M |                 /
+</span></span><span style="display:flex;"><span>30M |               /
+</span></span><span style="display:flex;"><span>20M |             /
+</span></span><span style="display:flex;"><span>10M |___________/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          Match Start
+</span></span></code></pre></div><p>A wicket, a six, or a controversial review can suddenly create massive spikes in traffic.</p>
+<hr>
+<h2 id="my-attempt-at-imagining-the-architecture">My Attempt at Imagining the Architecture</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>                  Users
+</span></span><span style="display:flex;"><span>                     │
+</span></span><span style="display:flex;"><span>                     ▼
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>              API Gateway
+</span></span><span style="display:flex;"><span>                     │
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> ┌──────────┬──────────┬───────────┐
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> ▼          ▼          ▼           ▼
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Auth      Ads      Analytics   Profiles
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> └──────────┬──────────┬───────────┘
+</span></span><span style="display:flex;"><span>            │
+</span></span><span style="display:flex;"><span>            ▼
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Kafka/Event Bus
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            │
+</span></span><span style="display:flex;"><span>            ▼
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      Real-Time Processing
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            │
+</span></span><span style="display:flex;"><span>            ▼
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       Data Platform
+</span></span></code></pre></div><hr>
+<h2 id="technologies-i-kept-seeing-everywhere">Technologies I Kept Seeing Everywhere</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Area</th>
+					<th>Possible Technologies</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Containers</td>
+					<td>Kubernetes</td>
+			</tr>
+			<tr>
+					<td>Streaming Events</td>
+					<td>Kafka</td>
+			</tr>
+			<tr>
+					<td>Caching</td>
+					<td>Redis</td>
+			</tr>
+			<tr>
+					<td>Monitoring</td>
+					<td>Grafana, Prometheus</td>
+			</tr>
+			<tr>
+					<td>Search</td>
+					<td>Elasticsearch</td>
+			</tr>
+			<tr>
+					<td>Storage</td>
+					<td>S3</td>
+			</tr>
+			<tr>
+					<td>Video Processing</td>
+					<td>FFmpeg</td>
+			</tr>
+			<tr>
+					<td>Real-time Processing</td>
+					<td>Apache Flink</td>
+			</tr>
+			<tr>
+					<td>Data Engineering</td>
+					<td>Apache Spark, Databricks</td>
+			</tr>
+			<tr>
+					<td>CDN Layer</td>
+					<td>Akamai, CloudFront, Fastly</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>I started with a very simple question:</p>
+<blockquote>
+<p>&ldquo;How is Hotstar streaming an IPL final without crashing?&rdquo;</p>
+</blockquote>
+<p>A few hours later, I was reading about CDNs, caching layers, distributed systems, real-time analytics, event streaming, and multi-region failover.</p>
+<p>What looked like a simple &ldquo;Play&rdquo; button turned out to be an engineering masterpiece.</p>
+<p>The next time I watch an IPL final, I&rsquo;ll probably still be cheering for the cricket.</p>
+<p>But a small part of me will also be wondering about the engineers staring at dashboards somewhere, hoping their systems survive the next six.</p>
+
+        </article>
+      </div>
+
+      <footer>
+        <p>Made with ❤ — Generated by Hugo</p>
+      </footer>
+    </div>
+  </body>
+</html>
